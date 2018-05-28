@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="nl" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments::head(title=|${werknemer.voornaam} ${werknemer.familienaam}|)"></head>
+<body>
+
+	<h1 th:text="|${werknemer.voornaam} ${werknemer.familienaam}|"></h1>
+
+</body>
+</html>
