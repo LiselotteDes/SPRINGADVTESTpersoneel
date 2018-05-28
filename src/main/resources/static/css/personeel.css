@@ -1,0 +1,20 @@
+body {
+	background-color: #F7FFCC;
+	color: #003300;
+	font-family: sans-serif;
+}
+
+h1 {
+	clear: both;
+}
+
+dt {
+	clear:left;
+	float: left;
+	width: 15em;
+}
+
+dd {
+	margin-left: 15em;
+	font-weight: bold;
+}
