@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,12 +36,15 @@ public class Werknemer implements Serializable {
 	private String familienaam;
 	private String voornaam;
 	private String email;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "jobtitelid")
 	private Jobtitel jobtitel;
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal salaris;
 	private String paswoord;
 	@DateTimeFormat(style = "S-")
 	private LocalDate geboorte;
+	@Column(unique = true)
 	private long rijksregisternr;
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "chefid")
@@ -53,36 +56,47 @@ public class Werknemer implements Serializable {
 	public long getId() {
 		return id;
 	}
+	
 	public String getFamilienaam() {
 		return familienaam;
 	}
+	
 	public String getVoornaam() {
 		return voornaam;
 	}
+	
 	public String getEmail() {
 		return email;
 	}
+	
 	public Jobtitel getJobtitel() {
 		return jobtitel;
 	}
+	
 	public BigDecimal getSalaris() {
 		return salaris;
 	}
-//	public String getPaswoord() {
-//		return paswoord;
-//	}
+	
+	public String getPaswoord() {
+		return paswoord;
+	}
+	
 	public LocalDate getGeboorte() {
 		return geboorte;
 	}
+	
 	public long getRijksregisternr() {
 		return rijksregisternr;
 	}
+	
 	public Werknemer getChef() {
 		return chef;
 	}
+	
 	public Set<Werknemer> getOndergeschikten() {
 		return Collections.unmodifiableSet(ondergeschikten);
 	}
+	
 	public long getVersie() {
 		return versie;
 	}
@@ -94,6 +108,7 @@ public class Werknemer implements Serializable {
 		result = prime * result + (int) (rijksregisternr ^ (rijksregisternr >>> 32));
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -112,6 +127,6 @@ public class Werknemer implements Serializable {
 		if (bedrag.compareTo(BigDecimal.ONE) <= 0) {
 			throw new IllegalArgumentException();
 		}
-		this.salaris = salaris.add(bedrag);
+		salaris = salaris.add(bedrag);
 	}
 }

@@ -4,6 +4,38 @@
 <body>
 
 	<h1 th:text="|${werknemer.voornaam} ${werknemer.familienaam}|"></h1>
+	
+	<dl>
+		<dt>Voornaam</dt>
+		<dd th:text="${werknemer.voornaam}"></dd>
+		<dt>Familienaam</dt>
+		<dd th:text="${werknemer.familienaam}"></dd>
+		<dt>Email adres</dt>
+		<dd th:text="${werknemer.email}"></dd>
+		<dt>Salaris</dt>
+		<dd th:text="${{werknemer.salaris}}"></dd>
+		<dt>Jobtitel</dt>
+		<dd th:text="${werknemer.jobtitel.naam}"></dd>
+		<dt>Geboorte</dt>
+		<dd th:text="${{werknemer.geboorte}}"></dd>
+		<dt th:if="${werknemer.chef != null}">Chef</dt>
+		<dd th:if="${werknemer.chef != null}">
+			<a th:href="@{/werknemers/{id}(id=${werknemer.chef.id})}" th:text="|${werknemer.chef.voornaam} ${werknemer.chef.familienaam}|"></a>
+		</dd>
+		<dt>Ondergeschikten</dt>
+		<dd>
+			<div th:each="ondergeschikte:${werknemer.ondergeschikten}">
+				<a th:href="@{/werknemers/{id}(id=${ondergeschikte.id})}" th:text="|${ondergeschikte.voornaam} ${ondergeschikte.familienaam}|"></a>
+			</div>
+		</dd>
+		<dt>Foto</dt>
+		<dd><img th:src="@{/images/{id}.jpg(id=${werknemer.id})}"></dd>
+	</dl>
+	
+	<ul class="navigatie">
+		<li><a th:href="@{/werknemers/{id}/opslag(id=${werknemer.id})}">Opslag</a></li>
+		<li><a th:href="@{/werknemers/{id}/rijksregisternummer(id=${werknemer.id})}">Rijksregisternummer</a></li>
+	</ul>
 
 </body>
 </html>

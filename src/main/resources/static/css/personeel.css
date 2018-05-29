@@ -1,6 +1,6 @@
 body {
-	background-color: #F7FFCC;
-	color: #003300;
+	background-color: #e2f5fe;
+	color: #0661aa;
 	font-family: sans-serif;
 }
 
@@ -8,13 +8,24 @@ h1 {
 	clear: both;
 }
 
+dd, dt {
+	margin-left: 0;
+}
+
 dt {
-	clear:left;
-	float: left;
-	width: 15em;
+	margin-top: 0.5em;
 }
 
 dd {
-	margin-left: 15em;
 	font-weight: bold;
+	margin-bottom: 0.5 em;
+}
+
+ul.navigatie {
+	list-style: none;
+	padding: 0;
+}
+
+ul.navigatie li {
+	display: inline;
 }

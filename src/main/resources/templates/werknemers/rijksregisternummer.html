@@ -5,5 +5,9 @@
 
 	<h1 th:text="|Rijksregisternummer van ${werknemer.voornaam} ${werknemer.familienaam}|"></h1>
 
+	<form th:action="@{/werknemers/{id}/rijksregisternummer(id=${werknemer.id})}" method="post" th:object="${rijksregisternummerForm}">
+	
+	</form>
+	
 </body>
 </html>
