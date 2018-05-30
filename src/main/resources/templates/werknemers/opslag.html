@@ -5,6 +5,19 @@
 
 	<h1 th:text="|Opslag voor ${werknemer.voornaam} ${werknemer.familienaam}|"></h1>
 	
+	<dl>
+		<dt>Huidig salaris</dt>
+		<dd th:text="${{werknemer.salaris}}"></dd>
+	</dl>
+	
+	<form th:action="@{/werknemers/{id}/opslag(id=${werknemer.id})}" method="post" th:object="${opslagForm}">
+		<label>
+			Bedrag:
+			<span th:if="${#fields.hasErrors('bedrag')}" th:errors="*{bedrag}"></span>
+			<input th:field="*{bedrag}" type="number" required autofocus>
+		</label>
+		<input type="submit" value="Opslag">
+	</form>
 
 </body>
 </html>

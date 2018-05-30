@@ -133,7 +133,7 @@ public class Werknemer implements Serializable {
 	}
 	
 	public void opslag(BigDecimal bedrag) {
-		if (bedrag.compareTo(BigDecimal.ONE) <= 0) {
+		if (bedrag.compareTo(BigDecimal.ONE) < 0) {
 			throw new IllegalArgumentException();
 		}
 		salaris = salaris.add(bedrag);

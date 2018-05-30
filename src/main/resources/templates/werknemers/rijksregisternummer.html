@@ -9,12 +9,15 @@
 	
 		<label>
 			Rijksregisternummer:
-			<span th:if="${#fields.hasErrors('rijksregisternr')}" th:errors="*{rijksregisternr}"></span>
 			<input th:field="*{rijksregisternr}" type="number" required autofocus>
 		</label>
 		
 		<input type="submit" value="Opslaan">
-	
+		
+		<div th:if="${#fields.hasGlobalErrors()}">
+			<div class="fout" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+		</div>
+		
 	</form>
 	
 </body>

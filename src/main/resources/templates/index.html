@@ -4,6 +4,8 @@
 <body>
 	<h1>Menu</h1>
 	
+	<div th:if="${param.fout != null}" th:text="${param.fout}" class="fout"></div>
+	
 	<ul>
 		<li><a th:href="@{/werknemers/{id}(id=${chef.id})}">Werknemershiërarchie</a></li>
 		<li><a th:href="@{/jobtitels}">Jobtitels</a></li>

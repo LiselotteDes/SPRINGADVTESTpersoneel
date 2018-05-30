@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.personeel.entities.Werknemer;
+import be.vdab.personeel.exceptions.WerknemerNietGevondenException;
 import be.vdab.personeel.repositories.WerknemerRepository;
 
 @Service
@@ -22,18 +23,30 @@ class DefaultWerknemerService implements WerknemerService {
 	
 	@Override
 	public Optional<Werknemer> findChef() {
+		
 		return werknemerRepository.findByChefIsNull();
+		
 	}
 	
 	@Override
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	public void opslag(long id, BigDecimal bedrag) {
 		
+		Optional<Werknemer> optionalWerknemer = werknemerRepository.findById(id);
+		
+		if (optionalWerknemer.isPresent()) {
+			optionalWerknemer.get().opslag(bedrag);
+		} else {
+			throw new WerknemerNietGevondenException();
+		}
+		
 	}
 	
 	@Override
 	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	public void update(Werknemer werknemer) {
+		
 		werknemerRepository.save(werknemer);
+		
 	}
 }
