@@ -10,4 +10,6 @@ public interface WerknemerService {
 	Optional<Werknemer> findChef();
 	
 	void opslag(long id, BigDecimal bedrag);
+	
+	void update(Werknemer werknemer);
 }

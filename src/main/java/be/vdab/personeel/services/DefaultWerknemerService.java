@@ -26,7 +26,14 @@ class DefaultWerknemerService implements WerknemerService {
 	}
 	
 	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 	public void opslag(long id, BigDecimal bedrag) {
 		
+	}
+	
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public void update(Werknemer werknemer) {
+		werknemerRepository.save(werknemer);
 	}
 }

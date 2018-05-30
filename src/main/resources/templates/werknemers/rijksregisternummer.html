@@ -5,7 +5,15 @@
 
 	<h1 th:text="|Rijksregisternummer van ${werknemer.voornaam} ${werknemer.familienaam}|"></h1>
 
-	<form th:action="@{/werknemers/{id}/rijksregisternummer(id=${werknemer.id})}" method="post" th:object="${rijksregisternummerForm}">
+	<form th:action="@{/werknemers/{id}/rijksregisternummer(id=${werknemer.id})}" method="post" th:object="${werknemer}">
+	
+		<label>
+			Rijksregisternummer:
+			<span th:if="${#fields.hasErrors('rijksregisternr')}" th:errors="*{rijksregisternr}"></span>
+			<input th:field="*{rijksregisternr}" type="number" required autofocus>
+		</label>
+		
+		<input type="submit" value="Opslaan">
 	
 	</form>
 	

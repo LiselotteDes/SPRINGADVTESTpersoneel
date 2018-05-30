@@ -18,13 +18,17 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
+import be.vdab.personeel.constraints.Rijksregisternummer;
+
 @Entity
 @Table(name = "werknemers")
 @NamedEntityGraph(name = Werknemer.MET_ONDERGESCHIKTEN_EN_CHEF, attributeNodes = {@NamedAttributeNode("ondergeschikten"), @NamedAttributeNode("chef")})
+@Rijksregisternummer
 public class Werknemer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,6 +49,7 @@ public class Werknemer implements Serializable {
 	@DateTimeFormat(style = "S-")
 	private LocalDate geboorte;
 	@Column(unique = true)
+	@NotNull
 	private long rijksregisternr;
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "chefid")
@@ -99,6 +104,10 @@ public class Werknemer implements Serializable {
 	
 	public long getVersie() {
 		return versie;
+	}
+	
+	public void setRijksregisternr(long rijksregisternr) {
+		this.rijksregisternr = rijksregisternr;
 	}
 	
 	@Override
