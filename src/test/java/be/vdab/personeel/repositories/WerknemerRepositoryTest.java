@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,14 @@ import be.vdab.personeel.entities.Werknemer;
 @Sql("/insertWerknemer.sql")
 public class WerknemerRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 	
-	private static final String WERKNEMERS = "werknemers";
+	private Werknemer werknemer;
 	@Autowired
 	private WerknemerRepository werknemerRepository;
+	
+	@Before
+	public void before() {
+		this.werknemer = new Werknemer();
+	}
 	
 	private long idVanTestWerknemer() {
 		return super.jdbcTemplate.queryForObject("select id from werknemers where voornaam='testWerknemer'", Long.class);

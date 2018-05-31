@@ -50,7 +50,7 @@ public class Werknemer implements Serializable {
 	private LocalDate geboorte;
 	@Column(unique = true)
 	@NotNull
-	private long rijksregisternr;
+	private Long rijksregisternr;
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "chefid")
 	private Werknemer chef;
@@ -90,8 +90,16 @@ public class Werknemer implements Serializable {
 		return geboorte;
 	}
 	
-	public long getRijksregisternr() {
+	public void setGeboorte(LocalDate geboorte) {
+		this.geboorte = geboorte;
+	}
+	
+	public Long getRijksregisternr() {
 		return rijksregisternr;
+	}
+	
+	public void setRijksregisternr(Long rijksregisternr) {
+		this.rijksregisternr = rijksregisternr;
 	}
 	
 	public Werknemer getChef() {
@@ -104,10 +112,6 @@ public class Werknemer implements Serializable {
 	
 	public long getVersie() {
 		return versie;
-	}
-	
-	public void setRijksregisternr(long rijksregisternr) {
-		this.rijksregisternr = rijksregisternr;
 	}
 	
 	@Override

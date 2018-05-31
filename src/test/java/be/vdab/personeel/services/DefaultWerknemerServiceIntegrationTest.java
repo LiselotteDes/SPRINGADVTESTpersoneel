@@ -60,16 +60,16 @@ public class DefaultWerknemerServiceIntegrationTest extends AbstractTransactiona
 		service.opslag(-1, BigDecimal.TEN);
 	}
 	
-//	@Test
-//	public void update() {
-//		
-//		Werknemer chef = service.findChef().get();
-//		chef.opslag(BigDecimal.TEN);
-//		service.update(chef);
-//		manager.flush();
-//		BigDecimal nieuwSalaris = super.jdbcTemplate.queryForObject("select salaris from werknemers where chef = null", BigDecimal.class);
-//		assertEquals(0, BigDecimal.valueOf(1010).compareTo(nieuwSalaris));
-//		
-//	}
+	@Test
+	public void update() {
+		
+		Werknemer chef = service.findChef().get();
+		chef.opslag(BigDecimal.TEN);
+		service.update(chef);
+		manager.flush();
+		BigDecimal nieuwSalaris = super.jdbcTemplate.queryForObject("select salaris from werknemers where chefid is null", BigDecimal.class);
+		assertEquals(0, BigDecimal.valueOf(1010).compareTo(nieuwSalaris));
+		
+	}
 
 }
