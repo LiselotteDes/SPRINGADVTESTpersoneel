@@ -50,7 +50,8 @@ public class Werknemer implements Serializable {
 	private LocalDate geboorte;
 	@Column(unique = true)
 	@NotNull
-	private Long rijksregisternr;
+//	private Long rijksregisternr;
+	private String rijksregisternr;
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "chefid")
 	private Werknemer chef;
@@ -90,15 +91,11 @@ public class Werknemer implements Serializable {
 		return geboorte;
 	}
 	
-	public void setGeboorte(LocalDate geboorte) {
-		this.geboorte = geboorte;
-	}
-	
-	public Long getRijksregisternr() {
+	public String getRijksregisternr() {
 		return rijksregisternr;
 	}
 	
-	public void setRijksregisternr(Long rijksregisternr) {
+	public void setRijksregisternr(String rijksregisternr) {
 		this.rijksregisternr = rijksregisternr;
 	}
 	
@@ -118,10 +115,10 @@ public class Werknemer implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (rijksregisternr ^ (rijksregisternr >>> 32));
+		result = prime * result + ((rijksregisternr == null) ? 0 : rijksregisternr.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -131,11 +128,14 @@ public class Werknemer implements Serializable {
 		if (!(obj instanceof Werknemer))
 			return false;
 		Werknemer other = (Werknemer) obj;
-		if (rijksregisternr != other.rijksregisternr)
+		if (rijksregisternr == null) {
+			if (other.rijksregisternr != null)
+				return false;
+		} else if (!rijksregisternr.equals(other.rijksregisternr))
 			return false;
 		return true;
 	}
-	
+
 	public void opslag(BigDecimal bedrag) {
 		if (bedrag.compareTo(BigDecimal.ONE) < 0) {
 			throw new IllegalArgumentException();

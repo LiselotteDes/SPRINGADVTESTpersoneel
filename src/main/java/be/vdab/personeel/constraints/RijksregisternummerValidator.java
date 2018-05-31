@@ -16,20 +16,20 @@ public class RijksregisternummerValidator implements ConstraintValidator<Rijksre
 	@Override
 	public boolean isValid(Werknemer werknemer, ConstraintValidatorContext context) {
 		
-		Long rijksregisternr = werknemer.getRijksregisternr();
+		String rijksregisternr = werknemer.getRijksregisternr();
 		LocalDate geboorte = werknemer.getGeboorte();
 		
 		if (rijksregisternr == null || geboorte == null) {
 			return true;
 		}
 		
-		if (String.valueOf(rijksregisternr).length() != 11) {
+		if (rijksregisternr.length() != 11) {
 			return false;
 		}
 		
-		String eerstePaarCijfers = String.valueOf(rijksregisternr).substring(0,2);
-		String tweedePaarCijfers = String.valueOf(rijksregisternr).substring(2,4);
-		String derdePaarCijfers = String.valueOf(rijksregisternr).substring(4,6);
+		String eerstePaarCijfers = rijksregisternr.substring(0,2);
+		String tweedePaarCijfers = rijksregisternr.substring(2,4);
+		String derdePaarCijfers = rijksregisternr.substring(4,6);
 		
 		long geboortejaar = geboorte.getYear() % 100L;
 		long geboortemaand = geboorte.getMonthValue();
@@ -39,14 +39,14 @@ public class RijksregisternummerValidator implements ConstraintValidator<Rijksre
 			return false;
 		}
 		
-		long controleGetal = rijksregisternr % 100L;
-		long eerste9Cijfers = rijksregisternr / 100;
+		String controleGetal = rijksregisternr.substring(9);
+		String eerste9Cijfers = rijksregisternr.substring(0,9);
 		
 		if (geboorte.getYear() >= 2000) {
-			eerste9Cijfers += 2_000_000_000;
+			eerste9Cijfers = 2 + eerste9Cijfers;
 		}
 		
-		return controleGetal == 97 - (eerste9Cijfers % 97);
+		return Long.parseLong(controleGetal) == 97L - (Long.parseLong(eerste9Cijfers) % 97);
 		
 	}
 	
