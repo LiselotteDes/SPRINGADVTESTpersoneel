@@ -52,6 +52,13 @@ public class WerknemerRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 		werknemer.opslag(BigDecimal.ZERO);
 	}
 	
+	@Test
+	public void opslagMagMet1() {
+		Werknemer werknemer = werknemerRepository.findById(idVanTestWerknemer()).get();
+		werknemer.opslag(BigDecimal.ONE);
+		assertEquals(0, BigDecimal.valueOf(1001).compareTo(werknemer.getSalaris()));
+	}
+	
 	@Test(expected = NullPointerException.class)
 	public void opslagMetNullKanNiet() {
 		Werknemer werknemer = werknemerRepository.findById(idVanTestWerknemer()).get();

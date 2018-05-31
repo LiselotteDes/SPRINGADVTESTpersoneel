@@ -31,9 +31,6 @@ public class RijksregisternummerValidator implements ConstraintValidator<Rijksre
 		String tweedePaarCijfers = String.valueOf(rijksregisternr).substring(2,4);
 		String derdePaarCijfers = String.valueOf(rijksregisternr).substring(4,6);
 		
-//		String eerste6Cijfers = String.valueOf(rijksregisternr).substring(0,6);
-//		String geboorteString = String.valueOf(geboorte.getYear() % 100) + String.valueOf(geboorte.getMonthValue()) + String.valueOf(geboorte.getDayOfMonth());
-		
 		long geboortejaar = geboorte.getYear() % 100L;
 		long geboortemaand = geboorte.getMonthValue();
 		long geboortedag = geboorte.getDayOfMonth();
