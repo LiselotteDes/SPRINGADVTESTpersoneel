@@ -18,6 +18,7 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -57,6 +58,7 @@ public class Werknemer implements Serializable {
 	private Werknemer chef;
 	@OneToMany(mappedBy = "chef")
 	private Set<Werknemer> ondergeschikten;
+	@Version
 	private long versie;
 	
 	public long getId() {
