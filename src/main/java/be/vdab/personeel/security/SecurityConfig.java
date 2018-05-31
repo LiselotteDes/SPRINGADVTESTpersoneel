@@ -15,6 +15,17 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String USERS_BY_USEREMAIL = "select email as username, paswoord as password, 1 as enabled from werknemers where email = ?";
 	private static final String AUTHORITIES_BY_USEREMAIL = "select email as username, 'werknemer' as authority from werknemers where email = ?";
 	
+	@Bean
+	JdbcDaoImpl jdbcDaoImpl(DataSource dataSource) {
+		
+		JdbcDaoImpl impl = new JdbcDaoImpl();
+		impl.setDataSource(dataSource);
+		impl.setUsersByUsernameQuery(USERS_BY_USEREMAIL);
+		impl.setAuthoritiesByUsernameQuery(AUTHORITIES_BY_USEREMAIL);
+		return impl;
+		
+	}
+	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		
@@ -27,18 +38,11 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.formLogin();
-		
-	}
-	
-	@Bean
-	JdbcDaoImpl jdbcDaoImpl(DataSource dataSource) {
-		
-		JdbcDaoImpl impl = new JdbcDaoImpl();
-		impl.setDataSource(dataSource);
-		impl.setUsersByUsernameQuery(USERS_BY_USEREMAIL);
-		impl.setAuthoritiesByUsernameQuery(AUTHORITIES_BY_USEREMAIL);
-		return impl;
+		http.formLogin()
+			.and()
+			.authorizeRequests()
+			.mvcMatchers("/", "/login", "/jobtitels/**").permitAll()
+			.mvcMatchers("/**").authenticated();
 		
 	}
 

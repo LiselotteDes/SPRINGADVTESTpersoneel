@@ -3,8 +3,19 @@
 		<entity-name>be.vdab.personeel.entities.Werknemer</entity-name>
 		<entity-width>120</entity-width>
 		<entity-height>326</entity-height>
-		<entity-X-Coordinate>68</entity-X-Coordinate>
-		<entity-Y-Coordinate>80</entity-Y-Coordinate>
+		<entity-X-Coordinate>217</entity-X-Coordinate>
+		<entity-Y-Coordinate>30</entity-Y-Coordinate>
+		<primary-collapsed>false</primary-collapsed>
+		<relation-collapsed>false</relation-collapsed>
+		<basic-collapsed>false</basic-collapsed>
+	</entity>
+
+	<entity>
+		<entity-name>be.vdab.personeel.entities.Jobtitel</entity-name>
+		<entity-width>120</entity-width>
+		<entity-height>166</entity-height>
+		<entity-X-Coordinate>640</entity-X-Coordinate>
+		<entity-Y-Coordinate>119</entity-Y-Coordinate>
 		<primary-collapsed>false</primary-collapsed>
 		<relation-collapsed>false</relation-collapsed>
 		<basic-collapsed>false</basic-collapsed>
